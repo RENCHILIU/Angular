@@ -1,0 +1,35 @@
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+interface Rule {
+  regex: string;
+  purpose: string;
+}
+
+interface ApiResponse {
+  csi: string;
+  rules: Rule[];
+}
+
+@Component({
+  selector: 'app-my-form',
+  templateUrl: './my-form.component.html',
+  styleUrls: ['./my-form.component.css']
+})
+export class MyFormComponent {
+  csi: string;
+
+  constructor(private http: HttpClient) {}
+
+  onSubmit() {
+    // Send an HTTP request to the API with the user's input as the csi parameter
+    this.http.get<ApiResponse>(`http://mywebsite/v1/csi/register?csi=${this.csi}`).subscribe(response => {
+      console.log(response);
+
+      // Do something with the API response
+      console.log(`CSI: ${response.csi}`);
+      console.log(`Rules:`);
+      response.rules.forEach(rule => console.log(`  - ${rule.purpose}: ${rule.regex}`));
+    });
+  }
+}
