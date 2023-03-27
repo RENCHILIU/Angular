@@ -1,0 +1,1 @@
+<input type="number" [(ngModel)]="csi" name="csi" required minlength="1" maxlength="6" pattern="[0-9]+">
