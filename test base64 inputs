@@ -1,0 +1,15 @@
+
+  submitInput() {
+    // Validate the user input using a regular expression
+    const regex = /^[A-Za-z0-9+/=]+$/;
+    if (!regex.test(this.userInput)) {
+      this.errorMessage = 'Invalid input. Only base64 characters are allowed.';
+      return;
+    }
+    
+    
+    <div>
+  <input type="text" [(ngModel)]="userInput">
+  <button (click)="submitInput()">Submit</button>
+  <div *ngIf="errorMessage">{{ errorMessage }}</div>
+</div>
